@@ -7,6 +7,18 @@ from telebot import types
 from datetime import datetime
 from typing import Tuple, Optional
 
+from aiohttp import web
+
+async def handle(request):
+    return web.Response(text="Bot is running")
+
+app = web.Application()
+app.add_routes([web.get('/', handle)])
+
+if __name__ == "__main__":
+    web.run_app(app, host="0.0.0.0", port=10000)
+
+
 bot = telebot.TeleBot('8424828219:AAH_7OzBaKGY0wxgJOqERKguugjzkhLjmFg')    
 GROQ_API_KEY = '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'
 @bot.message_handler(commands=['help', 'start'])
@@ -427,3 +439,4 @@ def cmd_logs(message):
 if __name__ == "__main__":
     print("все ок, бот запущен")
     bot.polling(none_stop=True)
+
